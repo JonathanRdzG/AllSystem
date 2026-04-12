@@ -1,0 +1,21 @@
+<?php
+
+namespace Database\Factories;
+
+use App\Models\Company;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class BranchFactory extends Factory
+{
+    public function definition(): array
+    {
+        return [
+            'company_id' => Company::factory(),
+            'name' => fake()->city(),
+            'code' => strtoupper(fake()->lexify('???')),
+            'address' => fake()->address(),
+            'phone' => fake()->phoneNumber(),
+            'active' => true,
+        ];
+    }
+}
