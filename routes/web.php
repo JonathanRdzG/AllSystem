@@ -25,3 +25,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('sales', SaleController::class);
     Route::resource('service-orders', ServiceOrderController::class);
 });
+
+require __DIR__.'/auth.php';
