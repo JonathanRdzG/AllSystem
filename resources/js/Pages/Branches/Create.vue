@@ -7,14 +7,14 @@ const save = () => form.post('/branches');
 </script>
 <template>
   <AdminLayout>
-    <div class="space-y-3 max-w-3xl">
-      <h1 class="text-2xl font-semibold">Create Branche</h1>
-      <input v-model="form.company_id" placeholder="company_id" class="border p-2 rounded" />
-      <input v-model="form.name" placeholder="name" class="border p-2 rounded" />
-      <input v-model="form.code" placeholder="code" class="border p-2 rounded" />
-      <input v-model="form.address" placeholder="address" class="border p-2 rounded" />
-      <input v-model="form.phone" placeholder="phone" class="border p-2 rounded" />
-      <button @click="save" class="bg-blue-600 text-white px-3 py-2 rounded">Guardar</button>
+    <div class="form-shell">
+      <h1 class="section-heading">Create Branche</h1>
+      <input v-model="form.company_id" placeholder="company_id" class="field" />
+      <input v-model="form.name" placeholder="name" class="field" />
+      <input v-model="form.code" placeholder="code" class="field" />
+      <input v-model="form.address" placeholder="address" class="field" />
+      <input v-model="form.phone" placeholder="phone" class="field" />
+      <button @click="save" class="btn-primary">Guardar</button>
     </div>
   </AdminLayout>
 </template>
