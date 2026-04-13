@@ -8,19 +8,19 @@ const save = () => form.put('/service-orders/${record.id}');
 </script>
 <template>
   <AdminLayout>
-    <div class="space-y-3 max-w-3xl">
-      <h1 class="text-2xl font-semibold">Edit ServiceOrder</h1>
-      <input v-model="form.company_id" placeholder="company_id" class="border p-2 rounded" />
-      <input v-model="form.branch_id" placeholder="branch_id" class="border p-2 rounded" />
-      <input v-model="form.customer_id" placeholder="customer_id" class="border p-2 rounded" />
-      <input v-model="form.assigned_user_id" placeholder="assigned_user_id" class="border p-2 rounded" />
-      <input v-model="form.status" placeholder="status" class="border p-2 rounded" />
-      <input v-model="form.title" placeholder="title" class="border p-2 rounded" />
-      <input v-model="form.description" placeholder="description" class="border p-2 rounded" />
-      <input v-model="form.promise_date" placeholder="promise_date" class="border p-2 rounded" />
-      <input v-model="form.comments" placeholder="comments" class="border p-2 rounded" />
+    <div class="form-shell">
+      <h1 class="section-heading">Edit ServiceOrder</h1>
+      <input v-model="form.company_id" placeholder="company_id" class="field" />
+      <input v-model="form.branch_id" placeholder="branch_id" class="field" />
+      <input v-model="form.customer_id" placeholder="customer_id" class="field" />
+      <input v-model="form.assigned_user_id" placeholder="assigned_user_id" class="field" />
+      <input v-model="form.status" placeholder="status" class="field" />
+      <input v-model="form.title" placeholder="title" class="field" />
+      <input v-model="form.description" placeholder="description" class="field" />
+      <input v-model="form.promise_date" placeholder="promise_date" class="field" />
+      <input v-model="form.comments" placeholder="comments" class="field" />
       <CustomFields :fields="customFields" v-model="form.custom_fields" />
-      <button @click="save" class="bg-blue-600 text-white px-3 py-2 rounded">Guardar</button>
+      <button @click="save" class="btn-primary">Guardar</button>
     </div>
   </AdminLayout>
 </template>

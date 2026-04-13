@@ -7,16 +7,16 @@ const save = () => form.post('/quotes');
 </script>
 <template>
   <AdminLayout>
-    <div class="space-y-3 max-w-3xl">
-      <h1 class="text-2xl font-semibold">Create Quote</h1>
-      <input v-model="form.company_id" placeholder="company_id" class="border p-2 rounded" />
-      <input v-model="form.branch_id" placeholder="branch_id" class="border p-2 rounded" />
-      <input v-model="form.customer_id" placeholder="customer_id" class="border p-2 rounded" />
-      <input v-model="form.user_id" placeholder="user_id" class="border p-2 rounded" />
-      <input v-model="form.status" placeholder="status" class="border p-2 rounded" />
-      <input v-model="form.valid_until" placeholder="valid_until" class="border p-2 rounded" />
-      <input v-model="form.total" placeholder="total" class="border p-2 rounded" />
-      <button @click="save" class="bg-blue-600 text-white px-3 py-2 rounded">Guardar</button>
+    <div class="form-shell">
+      <h1 class="section-heading">Create Quote</h1>
+      <input v-model="form.company_id" placeholder="company_id" class="field" />
+      <input v-model="form.branch_id" placeholder="branch_id" class="field" />
+      <input v-model="form.customer_id" placeholder="customer_id" class="field" />
+      <input v-model="form.user_id" placeholder="user_id" class="field" />
+      <input v-model="form.status" placeholder="status" class="field" />
+      <input v-model="form.valid_until" placeholder="valid_until" class="field" />
+      <input v-model="form.total" placeholder="total" class="field" />
+      <button @click="save" class="btn-primary">Guardar</button>
     </div>
   </AdminLayout>
 </template>
