@@ -15,6 +15,13 @@ class Customer extends Model
 
     protected $fillable = ['company_id', 'branch_id', 'name', 'tax_id', 'email', 'phone', 'notes', 'active'];
 
+    protected function casts(): array
+    {
+        return [
+            'active' => 'boolean',
+        ];
+    }
+
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);

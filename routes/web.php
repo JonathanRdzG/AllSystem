@@ -16,14 +16,14 @@ Route::get('/', fn () => redirect()->route('dashboard'));
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
-    Route::resource('companies', CompanyController::class);
-    Route::resource('branches', BranchController::class);
-    Route::resource('users', UserController::class);
-    Route::resource('customers', CustomerController::class);
-    Route::resource('products', ProductController::class);
-    Route::resource('quotes', QuoteController::class);
-    Route::resource('sales', SaleController::class);
-    Route::resource('service-orders', ServiceOrderController::class);
+    Route::resource('companies', CompanyController::class)->except('show');
+    Route::resource('branches', BranchController::class)->except('show');
+    Route::resource('users', UserController::class)->except('show');
+    Route::resource('customers', CustomerController::class)->except('show');
+    Route::resource('products', ProductController::class)->except('show');
+    Route::resource('quotes', QuoteController::class)->except('show');
+    Route::resource('sales', SaleController::class)->except('show');
+    Route::resource('service-orders', ServiceOrderController::class)->except('show');
 });
 
 require __DIR__.'/auth.php';

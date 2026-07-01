@@ -14,6 +14,13 @@ class Company extends Model
 
     protected $fillable = ['name', 'legal_name', 'tax_id', 'email', 'phone', 'active'];
 
+    protected function casts(): array
+    {
+        return [
+            'active' => 'boolean',
+        ];
+    }
+
     public function branches(): HasMany
     {
         return $this->hasMany(Branch::class);

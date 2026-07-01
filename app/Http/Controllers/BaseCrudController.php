@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -12,11 +13,35 @@ abstract class BaseCrudController extends Controller
     protected string $modelClass;
     protected string $page;
     protected array $with = [];
+    protected array $search = [];
+    protected string $resourceName = 'registro';
 
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $rows = $this->modelClass::query()->with($this->with)->latest('id')->paginate(15);
-        return Inertia::render("{$this->page}/Index", ['rows' => $rows]);
+        $search = trim((string) $request->input('search', ''));
+
+        $query = $this->modelClass::query()->with($this->with);
+
+        if ($search !== '' && $this->search !== []) {
+            $query->where(function (Builder $builder) use ($search): void {
+                foreach ($this->search as $index => $column) {
+                    $method = $index === 0 ? 'where' : 'orWhere';
+                    $builder->{$method}($column, 'like', "%{$search}%");
+                }
+            });
+        }
+
+        $rows = $query
+            ->latest('id')
+            ->paginate(15)
+            ->withQueryString();
+
+        return Inertia::render("{$this->page}/Index", [
+            'rows' => $rows,
+            'filters' => [
+                'search' => $search,
+            ],
+        ]);
     }
 
     public function create(): Response
@@ -29,7 +54,7 @@ abstract class BaseCrudController extends Controller
         $data = $request->validate($this->rules());
         $this->modelClass::create($data);
 
-        return redirect()->route($this->routeBase().'.index');
+        return $this->redirectToIndex("{$this->resourceTitle()} creada correctamente.");
     }
 
     public function edit(int $id): Response
@@ -43,13 +68,14 @@ abstract class BaseCrudController extends Controller
         $record = $this->modelClass::query()->findOrFail($id);
         $record->update($request->validate($this->rules()));
 
-        return redirect()->route($this->routeBase().'.index');
+        return $this->redirectToIndex("{$this->resourceTitle()} actualizada correctamente.");
     }
 
     public function destroy(int $id): RedirectResponse
     {
         $this->modelClass::query()->findOrFail($id)->delete();
-        return back();
+
+        return back()->with('success', "{$this->resourceTitle()} eliminada correctamente.");
     }
 
     protected function routeBase(): string
@@ -60,6 +86,18 @@ abstract class BaseCrudController extends Controller
     protected function extraPayload(): array
     {
         return [];
+    }
+
+    protected function resourceTitle(): string
+    {
+        return str($this->resourceName)->ucfirst()->toString();
+    }
+
+    protected function redirectToIndex(string $message): RedirectResponse
+    {
+        return redirect()
+            ->route($this->routeBase().'.index')
+            ->with('success', $message);
     }
 
     abstract protected function rules(): array;

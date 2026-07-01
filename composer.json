@@ -12,6 +12,7 @@
   "require-dev": {
     "fakerphp/faker": "^1.23",
     "laravel/pint": "^1.13",
+    "mockery/mockery": "^1.6",
     "pestphp/pest": "^3.0",
     "pestphp/pest-plugin-laravel": "^3.0"
   },
@@ -20,6 +21,11 @@
       "App\\": "app/",
       "Database\\Factories\\": "database/factories/",
       "Database\\Seeders\\": "database/seeders/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
     }
   },
   "scripts": {

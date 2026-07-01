@@ -13,7 +13,9 @@ class UserFactory extends Factory
     {
         return [
             'company_id' => Company::factory(),
-            'branch_id' => Branch::factory(),
+            'branch_id' => Branch::factory()->state(fn (array $attributes) => [
+                'company_id' => $attributes['company_id'],
+            ]),
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),

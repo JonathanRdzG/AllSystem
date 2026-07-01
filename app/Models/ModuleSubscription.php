@@ -10,4 +10,11 @@ class ModuleSubscription extends Model
     use HasFactory;
 
     protected $fillable = ['company_id', 'module_key', 'active'];
+
+    protected function casts(): array
+    {
+        return [
+            'active' => 'boolean',
+        ];
+    }
 }

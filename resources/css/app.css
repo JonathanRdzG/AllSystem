@@ -1,69 +1,127 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --app-bg: #eef3f6;
+    --app-surface: rgba(255, 255, 255, 0.88);
+    --app-ink: #0f172a;
+    --app-muted: #64748b;
+    --app-line: rgba(148, 163, 184, 0.25);
+    --app-accent: #0f766e;
+    --app-accent-soft: #ccfbf1;
+    --app-warm: #fb923c;
+  }
+
   html {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Sora', system-ui, sans-serif;
   }
 
   body {
-    @apply bg-slate-100 text-slate-700 antialiased;
+    @apply min-h-screen text-slate-700 antialiased;
+    background:
+      radial-gradient(circle at top left, rgba(15, 118, 110, 0.18), transparent 30%),
+      radial-gradient(circle at top right, rgba(251, 146, 60, 0.18), transparent 28%),
+      linear-gradient(180deg, #f8fafc 0%, var(--app-bg) 100%);
+  }
+
+  ::selection {
+    @apply bg-teal-200 text-slate-900;
   }
 }
 
 @layer components {
   .panel-surface {
-    @apply rounded-2xl border border-slate-200/80 bg-white shadow-sm;
+    background: var(--app-surface);
+    @apply rounded-[28px] border border-white/60 shadow-[0_20px_60px_rgba(15,23,42,0.08)] backdrop-blur;
   }
 
   .section-heading {
-    @apply text-2xl font-semibold tracking-tight text-slate-900;
+    @apply text-2xl font-semibold tracking-tight text-slate-950;
   }
 
   .section-description {
-    @apply text-sm text-slate-500;
+    @apply text-sm leading-6 text-slate-500;
   }
 
   .btn {
-    @apply inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/60 focus-visible:ring-offset-2;
+    @apply inline-flex items-center justify-center rounded-2xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500/50 focus-visible:ring-offset-2;
   }
 
   .btn-primary {
-    @apply btn bg-indigo-600 text-white shadow-sm hover:bg-indigo-500 active:bg-indigo-700;
+    @apply btn bg-slate-950 text-white shadow-[0_12px_25px_rgba(15,23,42,0.18)] hover:-translate-y-0.5 hover:bg-slate-800 active:translate-y-0;
   }
 
   .btn-secondary {
-    @apply btn border border-slate-200 bg-white text-slate-600 hover:bg-slate-50;
+    @apply btn border border-slate-200/80 bg-white/90 text-slate-700 hover:border-slate-300 hover:bg-white;
   }
 
   .btn-ghost {
-    @apply btn text-slate-500 hover:bg-slate-100 hover:text-slate-700;
+    @apply btn text-slate-500 hover:bg-slate-100/80 hover:text-slate-800;
   }
 
   .field {
-    @apply w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 placeholder:text-slate-400 transition focus:border-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/20;
+    @apply w-full rounded-2xl border border-slate-200/90 bg-white/90 px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 transition focus:border-teal-400 focus:outline-none focus:ring-4 focus:ring-teal-500/10;
   }
 
   .field-label {
-    @apply mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-500;
+    @apply mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-slate-500;
+  }
+
+  .field-help {
+    @apply mt-2 text-xs leading-5 text-slate-500;
+  }
+
+  .field-error {
+    @apply mt-2 text-sm font-medium text-rose-600;
   }
 
   .form-shell {
-    @apply panel-surface mx-auto max-w-3xl space-y-4 p-6;
+    @apply panel-surface mx-auto max-w-5xl space-y-6 p-6 sm:p-8;
+  }
+
+  .form-grid {
+    @apply grid gap-5 md:grid-cols-2;
   }
 
   .data-table {
-    @apply w-full overflow-hidden rounded-2xl border border-slate-200/80 bg-white;
+    @apply w-full border-separate border-spacing-0;
   }
 
   .data-table th {
-    @apply bg-slate-50 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500;
+    @apply border-b border-slate-200/70 bg-slate-50/80 px-5 py-4 text-left text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500;
   }
 
   .data-table td {
-    @apply border-t border-slate-100 px-4 py-3 text-sm text-slate-600;
+    @apply border-b border-slate-100/80 px-5 py-4 text-sm text-slate-700;
+  }
+
+  .status-chip {
+    @apply inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold;
+  }
+
+  .status-chip-muted {
+    @apply status-chip bg-slate-100 text-slate-600;
+  }
+
+  .status-chip-positive {
+    @apply status-chip bg-emerald-100 text-emerald-700;
+  }
+
+  .status-chip-warning {
+    @apply status-chip bg-amber-100 text-amber-700;
+  }
+
+  .status-chip-danger {
+    @apply status-chip bg-rose-100 text-rose-700;
+  }
+
+  .shell-gradient {
+    background:
+      linear-gradient(135deg, rgba(15, 118, 110, 0.12), rgba(255, 255, 255, 0)),
+      linear-gradient(225deg, rgba(251, 146, 60, 0.14), rgba(255, 255, 255, 0));
   }
 }

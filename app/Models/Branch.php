@@ -15,6 +15,13 @@ class Branch extends Model
 
     protected $fillable = ['company_id', 'name', 'code', 'address', 'phone', 'active'];
 
+    protected function casts(): array
+    {
+        return [
+            'active' => 'boolean',
+        ];
+    }
+
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
